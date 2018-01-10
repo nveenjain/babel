@@ -1368,6 +1368,10 @@ export default class StatementParser extends ExpressionParser {
       return this.parseFunction(expr, true, false, true, true);
     } else if (this.match(tt._class)) {
       return this.parseClass(expr, true, true);
+    } else if(this.match(types.at)){
+      this.parseDecorators(true);
+      expr = this.startNode();
+      expr = this.parseClass(expr, true, false, false, true);
     } else {
       const res = this.parseMaybeAssign();
       this.semicolon();
